@@ -1,0 +1,14 @@
+<div>
+    <ul>
+        <li ng-repeat="item in $ctrl.todoesItems track by $index">
+            {{ item }}
+        </li>
+    </ul>
+
+    <input placeholder="Add todo..." type="text" ng-model="$ctrl.newTodoItem"/>
+
+    <button
+        ng-click="$ctrl.onAddNewItem({$event: {newTodoItem: $ctrl.newTodoItem}})">
+        Add
+    </button>
+</div>
