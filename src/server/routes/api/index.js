@@ -1,5 +1,5 @@
-const schema = require('./schema'),
-    graphql = require('graphql').graphql,
+const schema = require ('./schema'),
+    { graphql } =  require('graphql'),
     express = require('express');
 
 const router = express.Router();

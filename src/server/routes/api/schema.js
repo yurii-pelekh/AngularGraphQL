@@ -1,23 +1,24 @@
-const GraphQL = require('graphql'),
-    GraphQLSchema = GraphQL.GraphQLSchema,
-    GraphQLObjectType = GraphQL.GraphQLObjectType,
-    GraphQLString = GraphQL.GraphQLString,
-    GraphQLList = GraphQL.GraphQLList,
-    GraphQLNonNull = GraphQL.GraphQLNonNull;
+const {
+    GraphQLSchema,
+    GraphQLObjectType,
+    GraphQLString,
+    GraphQLList,
+    GraphQLNonNull
+} = require('graphql');
 
-// Memory data store.
+// In memory data store
 let TodoesStore = [
     'First todo item',
     'Second todo item',
     'Third todo item'
 ];
 
-// Root level queries.
+// Root level queries
 const TodoesQuery = new GraphQLObjectType({
-    name: 'TodoesQuery',
+    name  : 'TodoesQuery',
     fields: () => ({
         items: {
-            type: new GraphQLList(GraphQLString),
+            type       : new GraphQLList(GraphQLString),
             description: 'List of todo items',
             resolve() {
                 return TodoesStore.concat();
@@ -26,14 +27,14 @@ const TodoesQuery = new GraphQLObjectType({
     })
 });
 
-// Mutations.
-const TodoMutations = new GraphQLObjectType({
-    name: 'TodoesMutations',
+// Mutations
+const TodoesMutations = new GraphQLObjectType({
+    name  : 'TodoesMutations',
     fields: () => ({
         addItem: {
-            type: GraphQLString,
-            description: 'New todo item adding',
-            args: {
+            type       : GraphQLString,
+            description: 'Add a new todo item',
+            args       : {
                 item: {
                     type: new GraphQLNonNull(GraphQLString)
                 }
@@ -46,11 +47,11 @@ const TodoMutations = new GraphQLObjectType({
     })
 });
 
-// Schema.
+// Schema
 const TodoesSchema = new GraphQLSchema({
-    name: 'TodoesSchema',
-    query: TodoesQuery,
-    mutation: TodoMutations
+    name    : 'TodoesSchema',
+    query   : TodoesQuery,
+    mutation: TodoesMutations
 });
 
 module.exports = TodoesSchema;
